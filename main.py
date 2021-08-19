@@ -113,4 +113,4 @@ if __name__ == "__main__":
 
     # program performace check
     print('\nCheckmark: ' + str(len(crypto_articles)) + " articles in " + str(round(execution_time, 2)) + " secs")
-    print(f'Average total time: {round(execution_time / 4, 2)} secs per thread')
+    print(f'Average total time: {round(execution_time / 6, 2)} secs per thread')
