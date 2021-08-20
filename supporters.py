@@ -67,7 +67,9 @@ def scrap_img_preview(target_object, img_area, prev_area):
         prev_agent = soup_pot.find_all('div', {'class': prev_area})
 
         # return img_agent
-        return img_agent[0]['src'], prev_agent[0].text.split('\n')[0]
+        new_info_block = {'img': img_agent[0]['src'], 'preview': prev_agent[0].text.split('\n')[0]}
+        return target_object.update(new_info_block)
+
 
     # error handling for connection failure
     except requests.exceptions.ConnectionError:
@@ -79,3 +81,4 @@ def scrap_img_preview(target_object, img_area, prev_area):
 
         # print error info and line that threw the exception
         print(error_type, 'Line:', error_info.tb_lineno)
+
