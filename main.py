@@ -25,9 +25,16 @@ if __name__ == "__main__":
     # result container
     crypto_articles = []
 
+    # threading.Thread(target=scrap_title_link, args=(economic_times, eco_top_news, crypto_articles)),
+    # threading.Thread(target=scrap_title_link, args=(economic_times, eco_sub_news, crypto_articles)),
+    # threading.Thread(target=scrap_title_link, args=(money_control, money_news, crypto_articles)),
+    # threading.Thread(target=scrap_title_link, args=(market_watch, market_news, crypto_articles)),
+    # threading.Thread(target=scrap_title_link, args=(investopedia, investopedia_top_news, crypto_articles)),
+    # threading.Thread(target=scrap_title_link, args=(investopedia, investopedia_sub_news, crypto_articles))
+
     # task container
     surface_thread_pool = [threading.Thread(target=scrap_title_link, args=(economic_times, eco_top_news, crypto_articles)),
-                   threading.Thread(target=scrap_title_link, args=(economic_times, eco_sub_news, crypto_articles))]
+                           threading.Thread(target=scrap_title_link, args=(economic_times, eco_sub_news, crypto_articles))]
 
     # Capture threading start time
     start_time = time.perf_counter()
@@ -52,40 +59,15 @@ if __name__ == "__main__":
     print('\nCheckmark: ' + str(len(crypto_articles)) + " articles in " + str(round(execution_time, 2)) + " secs")
     print(f'Average total time: {round(execution_time / 6, 2)} secs per thread')
 
-    jumping_thread_pool = []
-    for article in crypto_articles:
-        jumping_thread_pool.append(threading.Thread(target=scrap_img_preview, args=(article, eco_img, eco_prev)))
-
-    for thread in jumping_thread_pool:
-        thread.start()
-
-    for thread in jumping_thread_pool:
-        thread.join()
-
-    for item in crypto_articles:
-        print(item)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    # jumping_thread_pool = []
+    # for article in crypto_articles:
+    #     jumping_thread_pool.append(threading.Thread(target=scrap_img_preview, args=(article, eco_img, eco_prev)))
+    #
+    # for thread in jumping_thread_pool:
+    #     thread.start()
+    #
+    # for thread in jumping_thread_pool:
+    #     thread.join()
+    #
+    # for item in crypto_articles:
+    #     print(item)
