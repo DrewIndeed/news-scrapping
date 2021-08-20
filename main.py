@@ -24,12 +24,12 @@ if __name__ == "__main__":
     crypto_articles = []
 
     # task container
-    thread_pool = [threading.Thread(target=scrapTitleLink, args=(economic_times, eco_top_news, crypto_articles)),
-                   threading.Thread(target=scrapTitleLink, args=(economic_times, eco_sub_news, crypto_articles)),
-                   threading.Thread(target=scrapTitleLink, args=(money_control, money_news, crypto_articles)),
-                   threading.Thread(target=scrapTitleLink, args=(market_watch, market_news, crypto_articles)),
-                   threading.Thread(target=scrapTitleLink, args=(investopedia, investopedia_top_news, crypto_articles)),
-                   threading.Thread(target=scrapTitleLink, args=(investopedia, investopedia_sub_news, crypto_articles))]
+    thread_pool = [threading.Thread(target=scrap_title_link, args=(economic_times, eco_top_news, crypto_articles)),
+                   threading.Thread(target=scrap_title_link, args=(economic_times, eco_sub_news, crypto_articles)),
+                   threading.Thread(target=scrap_title_link, args=(money_control, money_news, crypto_articles)),
+                   threading.Thread(target=scrap_title_link, args=(market_watch, market_news, crypto_articles)),
+                   threading.Thread(target=scrap_title_link, args=(investopedia, investopedia_top_news, crypto_articles)),
+                   threading.Thread(target=scrap_title_link, args=(investopedia, investopedia_sub_news, crypto_articles))]
 
     # Capture threading start time
     start_time = time.perf_counter()

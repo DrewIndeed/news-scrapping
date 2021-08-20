@@ -12,7 +12,7 @@ def get_domain(full_url):
     return rs.group(0)[:-1]
 
 
-def scrapTitleLink(full_url, news_area, target_container):
+def scrap_title_link(full_url, news_area, target_container):
     """
     :param full_url: full url of the currently scrapping site
     :param news_area: the container/list of articles
