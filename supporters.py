@@ -12,7 +12,7 @@ def get_domain(full_url):
     return rs.group(0)[:-1]
 
 
-def scrap(full_url, news_area, target_container):
+def scrapTitleLink(full_url, news_area, target_container):
     """
     :param full_url: full url of the currently scrapping site
     :param news_area: the container/list of articles
@@ -20,8 +20,6 @@ def scrap(full_url, news_area, target_container):
     :return: void
     """
 
-    # store temporary results
-    scrap_result = []
     try:
         # suspicious statement so it needs error handling
         drilling_site = requests.get(full_url)
@@ -43,7 +41,7 @@ def scrap(full_url, news_area, target_container):
                     continue
 
                 # put into temporary container
-                scrap_result.append({"source": get_domain(full_url), "title": title.strip(), "link": link})
+                target_container.append({"source": get_domain(full_url), "title": title.strip(), "link": link})
 
     # error handling for connection failure
     except requests.exceptions.ConnectionError:
@@ -56,5 +54,4 @@ def scrap(full_url, news_area, target_container):
         # print error info and line that threw the exception
         print(error_type, 'Line:', error_info.tb_lineno)
 
-    # appending into external final container
-    target_container += scrap_result
+
