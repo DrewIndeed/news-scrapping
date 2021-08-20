@@ -53,32 +53,4 @@ def scrap_title_link(full_url, news_area, target_container):
         # print error info and line that threw the exception
         print(error_type, 'Line:', error_info.tb_lineno)
 
-def scrap_img_preview(target_object, img_area, prev_area):
-    target_link = target_object['link']
-    try:
-        # suspicious statement so it needs error handling
-        drilling_site = requests.get(target_link)
-
-        # manipulate using BeautifulSoup
-        soup_pot = BeautifulSoup(drilling_site.text, "html.parser")
-
-        # locate img area
-        img_agent = soup_pot.select(img_area)
-        prev_agent = soup_pot.select(prev_area)
-
-        # return img_agent
-        new_info_block = {'img': img_agent[0]['src'], 'preview': prev_agent[0].text.split('\n')[0]}
-        target_object.update(new_info_block)
-
-
-    # error handling for connection failure
-    except requests.exceptions.ConnectionError:
-        # get the exception information
-        error_type, error_obj, error_info = sys.exc_info()
-
-        # print the link that cause the problem
-        print('ERROR FOR LINK:', target_link)
-
-        # print error info and line that threw the exception
-        print(error_type, 'Line:', error_info.tb_lineno)
 

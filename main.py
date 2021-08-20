@@ -25,27 +25,29 @@ if __name__ == "__main__":
     # result container
     crypto_articles = []
 
-    # threading.Thread(target=scrap_title_link, args=(economic_times, eco_top_news, crypto_articles)),
-    # threading.Thread(target=scrap_title_link, args=(economic_times, eco_sub_news, crypto_articles)),
-    # threading.Thread(target=scrap_title_link, args=(money_control, money_news, crypto_articles)),
-    # threading.Thread(target=scrap_title_link, args=(market_watch, market_news, crypto_articles)),
-    # threading.Thread(target=scrap_title_link, args=(investopedia, investopedia_top_news, crypto_articles)),
-    # threading.Thread(target=scrap_title_link, args=(investopedia, investopedia_sub_news, crypto_articles))
-
     # task container
-    surface_thread_pool = [threading.Thread(target=scrap_title_link, args=(economic_times, eco_top_news, crypto_articles)),
-                           threading.Thread(target=scrap_title_link, args=(economic_times, eco_sub_news, crypto_articles))]
+    t1 = threading.Thread(target=scrap_title_link, args=(economic_times, eco_top_news, crypto_articles))
+    t2 = threading.Thread(target=scrap_title_link, args=(economic_times, eco_sub_news, crypto_articles))
+    t3 = threading.Thread(target=scrap_title_link, args=(money_control, money_news, crypto_articles))
+    t4 = threading.Thread(target=scrap_title_link, args=(market_watch, market_news, crypto_articles))
+    t5 = threading.Thread(target=scrap_title_link, args=(investopedia, investopedia_top_news, crypto_articles))
+    t6 = threading.Thread(target=scrap_title_link, args=(investopedia, investopedia_sub_news, crypto_articles))
 
     # Capture threading start time
     start_time = time.perf_counter()
+    t1.start()
+    t2.start()
+    t3.start()
+    t4.start()
+    t5.start()
+    t6.start()
 
-    # start threads
-    for thread in surface_thread_pool:
-        thread.start()
-
-    # end thread when completed
-    for thread in surface_thread_pool:
-        thread.join()
+    t1.join()
+    t2.join()
+    t3.join()
+    t4.join()
+    t5.join()
+    t6.join()
 
     # Capture threading execution time
     end_time = time.perf_counter()
@@ -58,16 +60,3 @@ if __name__ == "__main__":
     # program performace check
     print('\nCheckmark: ' + str(len(crypto_articles)) + " articles in " + str(round(execution_time, 2)) + " secs")
     print(f'Average total time: {round(execution_time / 6, 2)} secs per thread')
-
-    # jumping_thread_pool = []
-    # for article in crypto_articles:
-    #     jumping_thread_pool.append(threading.Thread(target=scrap_img_preview, args=(article, eco_img, eco_prev)))
-    #
-    # for thread in jumping_thread_pool:
-    #     thread.start()
-    #
-    # for thread in jumping_thread_pool:
-    #     thread.join()
-    #
-    # for item in crypto_articles:
-    #     print(item)
