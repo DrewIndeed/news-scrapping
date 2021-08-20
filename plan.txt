@@ -1,0 +1,23 @@
+What we have in one element of the big array
+- source --> title --> link to article
+
+What we want to do
+- Append in Img Link and Previews
+
+Initial Process already made
+- Get URL --> find news area --> scrap for links and titles
+
+Need to now
+- Connect to each link get the first img and the first paragraph --> another area to scrap
+
+So how to access each link?
+- If access on teh finished result it is going to be a pain --> access every time scrap for link
+
+So how to do that? I mean, in multithreading way
+- After running thread to scrap first hand on the surface
+ --> access all links at once to get img and prev (1st paragraph)
+
+Target area for each news
++ Economic Times
+- img: .artImg img --> return img_agent[0]['src']
+- prev: artText (using find_all --> no dots) --> return prev_agent[0].text.split("\n")[0]
