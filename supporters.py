@@ -26,7 +26,6 @@ def indi_attack(full_url, soup_pot, both_belong_area, indi_part, title_target, i
                 img_link = imgs[i]['data-src']
             container.append([clean_title, link, img_link])
 
-
 def scrap_both_belong(full_url, both_belong_area, indi_2, indi_1, title_target, img_target, container):
     try:
         # suspicious statement so it needs error handling
