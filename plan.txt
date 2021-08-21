@@ -17,7 +17,3 @@ So how to do that? I mean, in multithreading way
 - After running thread to scrap first hand on the surface
  --> access all links at once to get img and prev (1st paragraph)
 
-Target area for each news
-+ Economic Times
-- img: .artImg img --> return img_agent[0]['src']
-- prev: artText (using find_all --> no dots) --> return prev_agent[0].text.split("\n")[0]
