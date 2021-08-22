@@ -3,7 +3,6 @@ Python application to scrap articles in cryptocurrency categories from different
 
 ## Article Sources
 - Market Watch
-- Investopedia
 - Economictimes
 - Money Control
 
