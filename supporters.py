@@ -1,7 +1,6 @@
 import re
 import sys
 import requests
-import threading
 from bs4 import BeautifulSoup
 
 def get_domain(full_url):
@@ -24,7 +23,8 @@ def get_preview(article_link, preview_target, results):
         if len(preview) == 0:
             results.append("Click to discover further")
             return
-        results.append(preview[0].getText().strip())
+        s = preview[0].getText()
+        results.append(' '.join(s.split()))
 
     # error handling for connection failure
     except requests.exceptions.ConnectionError:
@@ -37,7 +37,7 @@ def get_preview(article_link, preview_target, results):
         # print error info and line that threw the exception
         print(error_type, 'Line:', error_info.tb_lineno)
 
-def indi_attack(full_url, soup_pot, both_belong_area, indi_part, title_target, img_target, container, preview_target, preview_results):
+def indi_attack(full_url, soup_pot, both_belong_area, indi_part, title_target, img_target, container, preview_results):
     titles = soup_pot.select(both_belong_area + " " + indi_part + " " + title_target)
     imgs = soup_pot.select(both_belong_area + " " + indi_part + " " + img_target)
     run_by = titles if (len(titles) < len(imgs)) else imgs
@@ -51,10 +51,9 @@ def indi_attack(full_url, soup_pot, both_belong_area, indi_part, title_target, i
             elif imgs[i].has_attr('data-src'):
                 img_link = imgs[i]['data-src']
             container.append([clean_title, link, img_link])
-            thread = threading.Thread(target=get_preview(link, preview_target, preview_results))
-            thread.start()
+            preview_results.append(link)
 
-def scrap_both_belong(full_url, both_belong_area, indi_2, indi_1, title_target, img_target, container, preview_target, preview_results):
+def scrap_both_belong(full_url, both_belong_area, indi_2, indi_1, title_target, img_target, container, preview_results):
     try:
         # suspicious statement so it needs error handling
         drilling_site = requests.get(full_url)
@@ -64,9 +63,9 @@ def scrap_both_belong(full_url, both_belong_area, indi_2, indi_1, title_target, 
 
         # target the scrapping area
         if indi_1 != "":
-            indi_attack(full_url, soup_pot, both_belong_area, indi_1, title_target, img_target, container, preview_target, preview_results)
+            indi_attack(full_url, soup_pot, both_belong_area, indi_1, title_target, img_target, container, preview_results)
 
-        indi_attack(full_url, soup_pot, both_belong_area, indi_2, title_target, img_target, container, preview_target, preview_results)
+        indi_attack(full_url, soup_pot, both_belong_area, indi_2, title_target, img_target, container, preview_results)
 
 
     # error handling for connection failure

@@ -3,7 +3,7 @@ Python application to scrap articles in cryptocurrency categories from different
 
 ## Article Sources
 - Market Watch
-- Economictimes
+- Investopedia
 - Money Control
 
 ## Technology Used
@@ -34,9 +34,13 @@ Python application to scrap articles in cryptocurrency categories from different
     
     - ***"import requests"*** to used
     
-  - threading:
+  - concurrent:
+    
+    - Only if missing, open terminal in working directory and type ***"pip3 install concurrent"***
+    
+    - ***"import concurrent"*** to used
+  - futures:
   
-    - Only if missing, open terminal in working directory and type ***"pip3 install threading"***
+    - Only if missing, open terminal in working directory and type ***"pip3 install futures"***
     
-    - ***"import threading"*** to used
-    
+    - ***"from concurrent import futures"*** to used
